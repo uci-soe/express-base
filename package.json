@@ -1,0 +1,44 @@
+{
+  "name": "express-base",
+  "version": "1.0.0",
+  "main": "bin/www.js",
+  "repository": {},
+  "author": "Rhett Lowe <rng2ml@gmail.com>",
+  "license": "BSD-2",
+  "scripts": {
+    "start": "node ./bin/www",
+    "build": "gulp build",
+    "prewatch": "npm run build",
+    "watch": "gulp watch",
+    "start-db": "./database-start.sh",
+    "kill-db": "./database-kill.sh"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "bootstrap-sass": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "debug": "^2.6.3",
+    "express": "^4.15.2",
+    "express-flash": "^0.0.2",
+    "express-validator": "^3.1.2",
+    "extend": "^3.0.0",
+    "font-awesome": "^4.7.0",
+    "hbs": "^4.0.1",
+    "jquery": "^3.2.1",
+    "moment": "^2.18.1",
+    "node-fetch": "^1.6.3",
+    "serve-favicon": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "gulp": "^3.9.1",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-webpack": "^1.5.0",
+    "vinyl-named": "^1.1.0"
+  }
+}

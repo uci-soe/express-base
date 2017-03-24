@@ -1,0 +1,49 @@
+@import "../../../node_modules/font-awesome/scss/font-awesome";
+
+@import "lib/theme/sandstone/variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "lib/theme/sandstone/bootswatch";
+
+
+$screen-xxs-min : 320px;
+$screen-xxs-max : 480px;
+
+body {
+  padding-top : 80px;
+}
+
+
+/* Pages */
+@import "pages/index";
+
+
+
+/* Custom page footer */
+.footer {
+  margin-top    : 20px;
+  padding-top   : 19px;
+  padding-right : 15px;
+  padding-left  : 15px;
+  //color         : #777;
+  border-top    : 1px solid #e5e5e5;
+  text-align    : center;
+
+}
+
+.dropdown-menu-right {
+  li {
+    text-align : right;
+  }
+}
+
+@media screen and (max-width : $screen-xxs-max) {
+  .hidden-xxs {
+    display : none !important;
+  }
+}
+
+@media screen and (min-width : $screen-xxs-max + 1) {
+  .visible-xxs {
+    display : none !important;
+  }
+}

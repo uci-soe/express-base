@@ -1,0 +1,25 @@
+<section id="login-page">
+
+  <form class="form-signin well well-lg" method="post" action="https://login.uci.edu/ucinetid/webauth">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    {{#if auth_msg}}
+      <ul>
+        {{#each auth_msg}}
+          <li class="text-danger">{{this}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    <input type="hidden" name="return_url" value="{{returnUrl}}">
+    <label for="username" class="sr-only">UCINetID</label>
+    <input type="text" id="username" name="ucinetid" class="form-control" placeholder="UCINetID" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <!--<div class="checkbox">-->
+      <!--<label>-->
+        <!--<input type="checkbox" value="remember-me"> Remember me-->
+      <!--</label>-->
+    <!--</div>-->
+    <input class="btn btn-lg btn-primary btn-block" name="login_button" type="submit" value="Sign in">
+  </form>
+
+</section>
