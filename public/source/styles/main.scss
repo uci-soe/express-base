@@ -5,6 +5,14 @@
 @import "lib/theme/sandstone/bootswatch";
 
 
+@import "./lib/mixins";
+// @import "./lib/animate";  // install animate with `yarn add animatewithsass`
+
+
+@import "./lib/toggle-switch";
+//@import "./lib/chosen"; // install chosen-js with yarn and uncomment
+@import "./lib/show-input-change";
+
 $screen-xxs-min : 320px;
 $screen-xxs-max : 480px;
 

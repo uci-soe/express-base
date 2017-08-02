@@ -1,0 +1,136 @@
+<section id="view-request">
+
+  <h1>User Information</h1>
+
+  <div class="row">
+    <div class="col-sm-3 user-links">
+      <div class="list-group" role="group" aria-label="request links">
+        <a href="#" class="list-group-item" data-toggle="modal" data-target="#edit-user-modal">
+          <i class="fa fa-pencil-square-o fa-fw fa-lg"></i>
+          Edit User
+        </a>
+        <a href="#" class="list-group-item delete-btn {{#unless user.rights.isAdmin}}disabled{{/unless}}">
+          <i class="fa fa-trash-o fa-fw fa-lg"></i>
+          Delete User
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-9 user-info">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <h4>User Information</h4>
+
+          <div class="row field-set">
+            <div class="col-sm-6 col-md-4 field-label">User Name</div>
+            <div class="col-sm-6 col-md-8 field-value">{{reqUser.name.full}}</div>
+          </div>
+          <div class="row field-set">
+            <div class="col-sm-6 col-md-4 field-label">Email</div>
+            <div class="col-sm-6 col-md-8 field-value">{{reqUser.email}}</div>
+          </div>
+
+
+          <hr>
+
+          <h4>Account Information</h4>
+
+          <div class="row field-set">
+            <div class="col-sm-6 col-md-4 field-label">UCINetID</div>
+            <div class="col-sm-6 col-md-8 field-value">{{reqUser.ucinetid}}</div>
+          </div>
+          <div class="row field-set">
+            <div class="col-sm-6 col-md-4 field-label">Campus ID</div>
+            <div class="col-sm-6 col-md-8 field-value">{{reqUser.campusid}}</div>
+          </div>
+          <div class="row field-set">
+            <div class="col-sm-6 col-md-4 field-label">Is Administrator</div>
+            <div class="col-sm-6 col-md-8 field-value">
+              {{#if reqUser.rights.isAdmin}}
+                <i class="fa fa-user-secret"></i>
+                Is Admin
+              {{else}}
+                <i class="fa fa-user"></i>
+                Not Admin
+              {{/if}}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Modals -->
+<div class="modal fade jq-submit" id="edit-user-modal" tabindex="-1" role="dialog"
+     aria-labelledby="edit-user-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="edit-user-label">Edit User</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{{reqUser.link}}" method="PUT" class="form-horizontal">
+
+          <h4>General Information</h4>
+          <div class="form-group">
+            <label for="user-name-first" class="control-label col-sm-3">First Name:</label>
+            <div class="col-sm-9">
+              <input type="text" name="name-first" id="user-name-first" class="form-control" required
+                     value="{{reqUser.name.first}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-name-last" class="control-label col-sm-3">Last Name:</label>
+            <div class="col-sm-9">
+              <input type="text" name="name-last" id="user-name-last" class="form-control" required
+                     value="{{reqUser.name.last}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-email" class="control-label col-sm-3">Email:</label>
+            <div class="col-sm-9">
+              <input type="text" name="email" id="user-email" class="form-control" required
+                     value="{{reqUser.email}}">
+            </div>
+          </div>
+
+          <hr />
+
+          <h4>Rights</h4>
+          {{#if user.rights.isAdmin}}
+            <div class="form-group" id="admin-toggle">
+              <label for="user-is-admin" class="control-label col-sm-3">Is Admin:</label>
+              <div class="col-sm-9">
+                <label class="switch form-control">
+                  <input type="checkbox" name="is-admin" id="user-is-admin" value="1" {{#if reqUser.rights.isAdmin}}checked="checked"{{/if}}>
+                  <div class="slider round"></div>
+                </label>
+              </div>
+            </div>
+          {{/if}}
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default xxs-block" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary accept-btn xxs-block">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modals -->
+
+
+<script>window.USER = {{{toJson user}}};</script>
+<script src="/js/view-user.js"></script>

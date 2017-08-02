@@ -7,6 +7,9 @@
 const $       = require('jquery');
 window.jQuery = $;
 window.$      = $;
+// require('chosen-js'); // install and uncomment to use
+
+require('./lib/animate');
 
 require('bootstrap-sass');
 const refresh = require('./lib/refresh');

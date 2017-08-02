@@ -1,0 +1,138 @@
+<section id="search-users">
+
+  <div class="row">
+    <div class="col-md-10 col-md-push-1">
+      <h1>Users</h1>
+
+
+      <div class="input-group">
+        <input type="text" id="searchbox" class="form-control" aria-label="Search Requests" placeholder="Search Here">
+        <div class="input-group-btn">
+          <!--<button type="button" class="btn btn-default dropdown-toggle disabled" data-toggle="dropdown" aria-haspopup="true"-->
+          <!--aria-expanded="false">Action <span class="caret"></span></button>-->
+          <!--<ul class="dropdown-menu dropdown-menu-right">-->
+          <!--<li><a href="#">Action</a></li>-->
+          <!--<li><a href="#">Another action</a></li>-->
+          <!--<li><a href="#">Something else here</a></li>-->
+          <!--<li role="separator" class="divider"></li>-->
+          <!--<li><a href="#">Separated link</a></li>-->
+          <!--</ul>-->
+          <a href="#" class="btn btn-default pull-right" data-toggle="modal" data-target="#new-user-modal"
+             title="Add User" aria-label="Add User">
+            <i class="fa fa-user-plus fa-lg"></i>
+          </a>
+        </div><!-- /btn-group -->
+      </div><!-- /input-group -->
+
+
+      <div class="paginator"></div>
+
+
+      <div id="searchResults" class="list-group">
+      </div>
+
+
+      <div class="paginator"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Modals -->
+<div class="modal fade jq-submit" id="new-user-modal" tabindex="-1" role="dialog"
+     aria-labelledby="new-user-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="new-user-label">New User</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" class="form-horizontal">
+
+          <h4>General Information</h4>
+          <div class="form-group">
+            <label for="user-name-first" class="control-label col-sm-3">First Name:</label>
+            <div class="col-sm-9">
+              <input type="text" name="name.first" id="user-name-first" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-name-last" class="control-label col-sm-3">Last Name:</label>
+            <div class="col-sm-9">
+              <input type="text" name="name.last" id="user-name-last" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-ucinetid" class="control-label col-sm-3">UCINetID:</label>
+            <div class="col-sm-9">
+              <input type="text" name="ucinetid" id="user-ucinetid" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="user-email" class="control-label col-sm-3">Email:</label>
+            <div class="col-sm-9">
+              <input type="text" name="email" id="user-email" class="form-control" placeholder="**blank if same as UCINetID**" />
+            </div>
+          </div>
+
+          <hr />
+
+          <h4>Rights</h4>
+
+          {{#if user.rights.isAdmin}}
+            <div class="form-group" id="admin-toggle">
+              <label for="user-is-admin" class="control-label col-sm-3">Is Admin:</label>
+              <div class="col-sm-9">
+                <label class="switch form-control">
+                  <input type="checkbox" name="rights.isAdmin" id="user-is-admin" value="1" />
+                  <div class="slider round"></div>
+                </label>
+              </div>
+            </div>
+          {{/if}}
+
+          <hr />
+
+          <h4>Other</h4>
+
+          <div class="form-group">
+            <label for="user-notify" class="control-label col-sm-3">Welcome Email:</label>
+            <div class="col-sm-9">
+              <label class="switch form-control">
+                <input type="checkbox" name="user-notify" id="user-notify" value="1" checked="checked" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default xxs-block" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit-btn accept-btn xxs-block">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modals -->
+
+
+
+{{{{raw-helper}}}}
+<script id="user-li-template" type="text/x-handlebars-template">
+  <a href="{{link}}" class="list-group-item" aria-label="View Request">
+    <span class="name">{{name.full}}</span>
+    <span class="dept">{{#each rights.departments}}{{this}} {{/each}}</span>
+    <span class="email">{{email}}</span>
+
+    {{#if rights.isAdmin}}<span class="admin" title="Admin User"><i class="fa fa-user-secret fa-lg"></i></span>{{/if}}
+  </a>
+</script>
+{{{{/raw-helper}}}}
+
+<script src="/js/search-user.js"></script>

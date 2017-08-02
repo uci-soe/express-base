@@ -3,28 +3,32 @@
 const express       = require('express');
 const path          = require('path');
 const favicon       = require('serve-favicon');
-// const logger        = require('morgan');
-const cookieParser     = require('cookie-parser');
+const cookieParser  = require('cookie-parser');
 const cookieSession = require('cookie-session');
 // const session          = require('express-session');
 // const RedisStore       = require('connect-redis')(session);
 const flash            = require('express-flash');
 const expressValidator = require('express-validator');
 const bodyParser       = require('body-parser');
-// const passport         = require('./lib/passport');
-const uciAuth         = require('./lib/uci-webauth');
-const hbs              = require('hbs');
+const domainRedirect   = require('./lib/domain-redirect');
+const uciAuth          = require('./lib/uci-webauth');
+const hbs              = require('./lib/hbs-extend');
 const extend           = require('extend');
 // const jsonAccept       = require('./lib/connect-json-accept');
 
-const hbsExtend = require('./lib/hbs-extend')(hbs);
-
-const routes  = require('./routes/index');
-const API     = require('./routes/api');
-const admin   = require('./routes/admin');
-const debug   = require('./routes/debug');
+const routes   = require('./routes/index');
+const API      = require('./routes/api');
+const admin    = require('./routes/admin');
+const user     = require('./routes/user');
+const settings = require('./routes/settings');
+const debug    = require('./routes/debug');
 
 const app = express();
+
+
+if (app.get('env') === 'production') {
+  app.use(domainRedirect({to: config.host}));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,8 +56,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // ttl 24 hours (in ms)
 }));
 app.use(uciAuth.connect);
-// app.use(passport.initialize());
-// app.use(passport.session());
 app.use(flash());
 app.use(function (req, res, next) {
   res.locals.user = req.user;
@@ -82,7 +84,9 @@ if (app.get('env') === 'development') {
 
 app.use('/', routes);
 app.use('/admin', uciAuth.isAuthenticated, uciAuth.isAdmin, admin);
-app.use('/', uciAuth.isAuthenticated, API);
+app.use('/user', uciAuth.isAuthenticated, uciAuth.isUser, user);
+app.use('/settings', uciAuth.isAuthenticated, uciAuth.isAdmin, settings);
+app.use('/api', uciAuth.isAuthenticated, API);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

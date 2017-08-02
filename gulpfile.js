@@ -11,7 +11,7 @@ const rm         = require('gulp-rimraf');
 
 /* JavaScript */
 gulp.task('js', ['js:clean'], function () {
-  return gulp.src('public/source/js/*.js')
+  return gulp.src(['public/source/js/*.js', 'public/source/js/forms/*.js', 'public/source/js/pages/*.js'])
     .pipe(named())
     .pipe(webpack({
       devtool: 'source-map',

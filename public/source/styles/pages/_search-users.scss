@@ -1,0 +1,59 @@
+#search-users {
+
+  .paginator {
+    text-align : center;
+
+    .pagination {
+      //margin : 5px 0 2px;
+    }
+  }
+
+
+  #searchResults {
+
+    a.list-group-item {
+      position : relative;
+
+      .admin {
+        position : absolute;
+        right : 24px;
+        top : 16px;
+      }
+
+      .icons {
+        position : absolute;
+        right : 24px;
+        top : 16px + 18px + 5px;
+
+        i {
+          font-size :40px;
+        }
+      }
+    }
+
+
+    .name {
+      display : block;
+      font-size :16px;
+    }
+    .ucinetid {
+      display : block;
+
+      &:before {
+        @extend .text-muted;
+        content: 'UCINetID ';
+      }
+    }
+    .software {
+      display : block;
+
+      &:before {
+        @extend .text-muted;
+        content: 'Software ';
+      }
+    }
+
+  }
+
+
+}

@@ -1,0 +1,50 @@
+<section id="change-settings">
+
+  <h1>Department Information</h1>
+
+  <div class="row">
+    <!--<div class="col-sm-3 user-links">-->
+    <!--<div class="list-group" role="group" aria-label="request links">-->
+    <!--&lt;!&ndash;<a href="#" class="list-group-item" data-toggle="modal" data-target="#edit-dept-modal">&ndash;&gt;-->
+    <!--&lt;!&ndash;<i class="fa fa-pencil-square-o fa-fw fa-lg"></i>&ndash;&gt;-->
+    <!--&lt;!&ndash;Edit Dept.&ndash;&gt;-->
+    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href="#" class="list-group-item delete-btn">&ndash;&gt;-->
+    <!--&lt;!&ndash;<i class="fa fa-trash-o fa-fw fa-lg"></i>&ndash;&gt;-->
+    <!--&lt;!&ndash;Delete Dept.&ndash;&gt;-->
+    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="col-sm-12">
+
+      <form action="{{meta.baseUrl}}" method="post" class="form-horizontal show-input-change">
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+
+            {{#each editableSettings as |value setting|}}
+              <div class="row form-group">
+                <label for="setting-{{setting}}" class="col-sm-3 col-md-3 control-label">{{setting}}</label>
+                <div class="col-sm-9 col-md-9">
+                  {{{input 'setting-' setting value}}}
+                </div>
+              </div>
+            {{/each}}
+
+
+          </div>
+          <div class="panel-footer text-right">
+            <button class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</section>
+
+
+<script>window.CONFIG = {{{toJson config}}};</script>
+<script src="/js/manage-settings.js"></script>

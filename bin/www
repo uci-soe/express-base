@@ -5,12 +5,24 @@
  * Module dependencies.
  */
 
-const debug = require('debug')('server:server');
-const http  = require('http');
-// const db = require('../models');
-const app   = require('../app');
+const debug  = require('debug')('server:server');
+const http   = require('http');
+const db     = require('../models');
+const app    = require('../app');
+const config = require('../config');
 
 
+// Check for users in DB;
+require('../add-init-user')();
+
+debug('Configuring Settings')
+db.Settings
+  .initialize(config)
+  .then(s => {debug('Synced Settings'); return s})
+  .then(newSettings => config.$update(newSettings))
+  .then(s => {debug('Config Updated'); return s})
+  .catch(err => console.error(err.stack))
+;
 
 /**
  * Get port from environment and store in Express.
